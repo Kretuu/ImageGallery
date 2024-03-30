@@ -71,3 +71,7 @@ end
 # Authentication and authorisation
 gem "devise", "~> 4.9"
 gem 'cancancan'
+
+# Bootstrap
+gem "bootstrap"
+gem "sassc-rails"
