@@ -28,5 +28,12 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+
+    can :read, PhotoGallery
+    can :read, Photo
+
+    return unless user.present?
+    can :manage, PhotoGallery, user: user
+    can :manage, Photo, photo_gallery: { user: user }
   end
 end
