@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "photo_gallery#index"
+  resources :photo_gallery, path: 'gallery'
 end

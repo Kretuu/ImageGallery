@@ -1,0 +1,157 @@
+<%= stylesheet_link_tag 'index' %>
+
+<div class="position-relative p-3 p-md-5 text-center bg-body-secondary">
+  <div class="col-md-6 p-lg-5 mx-auto my-5">
+    <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
+    <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
+    <div class="d-flex gap-3 justify-content-center lead fw-normal">
+      <a class="icon-link" href="#">
+        Slideshow
+        <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+      </a>
+      <% if can? :manage, @photo_gallery %>
+        <a class="icon-link" href="#">
+          Set album thumbnail
+          <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+        </a>
+        <a class="icon-link" href="#">
+          Add photo
+          <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="album bg-body-tertiary">
+  <div class="container text-center py-2">
+    <%= render 'layouts/error' %>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-2">
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <% if can? :manage, @photo_gallery %>
+            <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+              <div class="position-absolute top-50 start-50 translate-middle">
+                <button class="btn btn-outline-warning">Crop</button>
+                <button class="btn btn-outline-danger">Delete</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://thumbs.dreamstime.com/b/odmienna-koncepcja-bycia-innym-i-wyjątkowym-symbolem-indywidualności-specjalnego-talentu-reprezentującego-przywództwo-w-d-191808155.jpg"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://img.freepik.com/premium-photo/red-balloon-floating-out-from-blue-balloons-that-are-tied-blue-background-performance-outstanding-from-crowd-different-thinking-disruption-leadership-by-3d-rendering_50039-2720.jpg"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://media.interflora.co.uk/i/interflora/Single_red_rose_with_buds"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="img-container w-100 h-100 ratio ratio-4x3">
+          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
+               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
+          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button class="btn btn-outline-warning">Crop</button>
+              <button class="btn btn-outline-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

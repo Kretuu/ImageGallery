@@ -3,4 +3,12 @@ class PhotoGalleryController < ApplicationController
   def index
 
   end
+
+  def new
+
+  end
+
+  def show
+    # flash.now[:alert] = "Could not add a facilitator to the module."
+  end
 end
