@@ -1,0 +1,8 @@
+<% if flash.present? %>
+  <div class="container py-2 flash-messages text-start">
+    <% flash.each do |message_type, message| %>
+      <% next unless message_type == 'alert' || message_type == 'notice' %>
+      <div class="alert alert-<%= message_type == 'notice' ? 'success' : 'danger' %>"><%= message %></div>
+    <% end %>
+  </div>
+<% end %>
