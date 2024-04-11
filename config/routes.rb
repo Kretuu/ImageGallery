@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "photo_gallery#index"
-  resources :photo_gallery, path: 'gallery'
+  resources :photo_gallery, path: 'gallery' do
+    post :set_thumbnail, action: :set_thumbnail, controller: 'photo_gallery'
+  end
 end

@@ -7,19 +7,30 @@
            class="object-fit-cover bg-dark h-100" alt="">
     <% end %>
     <div class="col-md-6 p-lg-5 mx-auto my-5">
-      <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
+      <%= form_with model: @photo_gallery, method: :put,
+                    class: 'row row-cols-lg-auto g-3 align-items-start justify-content-center was-validated' do |f| %>
+        <div class="col-12 text-start mb-3">
+          <%= f.text_field :name, placeholder: "Album title", class: "form-control form-control-lg",
+                           id: "validationName", "aria-describedby": "validationNameFeedback", required: 1,
+                           minlength: 3, maxlength: 20 %>
+          <div id="validationNameFeedback" class="invalid-feedback">
+            Album title is not valid.
+          </div>
+        </div>
+        <div class="col-12">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+        <div class="col-12">
+          <input type="reset" class="btn btn-secondary" value="Reset">
+        </div>
+      <% end %>
       <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
-        <a class="icon-link" href="#">
-          Slideshow
-          <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-        </a>
-        <% if can? :manage, @photo_gallery %>
-          <%= link_to "Edit gallery", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
-          <a class="icon-link" href="#">
-            Add photo
-            <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-          </a>
+        <%= link_to "Go back to gallery view", photo_gallery_path(@photo_gallery), class: "icon-link" %>
+        <% if @set_thumbnail %>
+          <%= link_to "Cancel set thumbnail", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
+        <% else %>
+          <%= link_to "Set thumbnail", edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), class: "icon-link" %>
         <% end %>
       </div>
     </div>
@@ -36,13 +47,11 @@
         <div class="img-container w-100 h-100 ratio ratio-4x3">
           <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
                class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <% if can? :manage, @photo_gallery %>
-            <% if @choose_thumbnail %>
-              <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery), method: :post do %>
-                <div class="overlay bg-warning img-thumbnail" style="--bs-bg-opacity: .5">
-                  <div class="position-absolute top-50 start-50 translate-middle">
-                    <i class="fs-1 text-warning bi bi-check-lg"></i>
-                  </div>
+            <% if @set_thumbnail %>
+              <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery, thumbnail_id: 1), method: :post,
+                            class: "overlay bg-warning img-thumbnail", style: "--bs-bg-opacity: .5" do %>
+                <div class="position-absolute top-50 start-50 translate-middle">
+                  <i class="fs-1 text-warning bi bi-check-lg"></i>
                 </div>
               <% end %>
             <% else %>
@@ -53,7 +62,6 @@
                 </div>
               </div>
             <% end %>
-          <% end %>
         </div>
       </div>
       <div class="col">
