@@ -24,6 +24,35 @@
     opacity: 1;
 }
 
+.fullscreen-preview {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.fullscreen-preview .preview-active {
+    opacity: 1;
+    padding: 1rem;
+}
+
+#preview {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 5vh;
+}
+
+body.preview-active {
+    overflow: hidden !important;
+}
+
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;

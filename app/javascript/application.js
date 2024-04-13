@@ -4,3 +4,6 @@ import "controllers"
 
 import "popper"
 import "bootstrap"
+
+import axios from "axios"
+import loadImage from 'src/fullscreen_image'
