@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   root "photo_gallery#index"
   resources :photo_gallery, path: 'gallery' do
     post :set_thumbnail, action: :set_thumbnail, controller: 'photo_gallery'
+    resources :photo
   end
 end
