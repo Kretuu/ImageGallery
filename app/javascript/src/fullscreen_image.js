@@ -1,9 +1,11 @@
 import axios from "axios";
 
-function loadImage() {
+var currentLoadedImage = null;
+
+function loadImage(path) {
     console.log(axios({
         method: 'GET',
-        url: '/gallery/1/edit',
+        url: path,
     }));
 }
 

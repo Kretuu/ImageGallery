@@ -4,4 +4,9 @@ class Photo < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [250, 250]
   end
+
+  protected
+  def create_cropped_image
+
+  end
 end

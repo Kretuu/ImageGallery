@@ -15,7 +15,7 @@
       <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
       <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
-        <button class="icon-link" onclick="FullscreenMode.loadImage()">
+        <button class="icon-link" onclick="FullscreenMode.loadImage('<%= photo_gallery_photo_path(@photo_gallery, 1) %>')">
           Slideshow
           <svg class="bi"><use xlink:href="#chevron-right"/></svg>
         </button>

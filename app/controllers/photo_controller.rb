@@ -6,7 +6,18 @@ class PhotoController < ApplicationController
 
   end
 
-  def show
+  def create
 
+  end
+
+  def show
+    respond_to do |format|
+      format.json { render json: t.response }
+    end
+  end
+
+  private
+  def photo_params
+    params.require(:photo).permit(:original_image)
   end
 end
