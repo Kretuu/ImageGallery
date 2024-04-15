@@ -5,5 +5,5 @@ class PhotoGallery < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [250, 250]
   end
 
-  validates :name, presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ }, length: { minimum: 3, maximum: 15 }
+  validates :name, presence: true, length: { minimum: 3, maximum: 15 }
 end

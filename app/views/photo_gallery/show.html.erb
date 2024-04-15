@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag 'index' %>
 <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-<div class="fullscreen-preview text-center">
-  <img id="preview" src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png">
-</div>
+<!--<div class="fullscreen-preview text-center">-->
+<!--  <img id="preview" src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png">-->
+<!--</div>-->
 
 <div class="position-relative text-center bg-body-secondary">
   <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">
@@ -15,10 +15,10 @@
       <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
       <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
-        <a class="icon-link" href="#" onClick='loadImage("test")'>
+        <button class="icon-link" onclick="FullscreenMode.loadImage()">
           Slideshow
           <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-        </a>
+        </button>
         <% if can? :manage, @photo_gallery %>
           <%= link_to "Edit gallery", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
           <a class="icon-link" href="#">
