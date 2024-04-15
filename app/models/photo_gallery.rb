@@ -1,9 +1,7 @@
 class PhotoGallery < ApplicationRecord
   belongs_to :user
   belongs_to :thumbnail, class_name: 'Photo', foreign_key: 'thumbnail_id', optional: true
-  has_many_attached :photos do |attachable|
-    attachable.variant :thumb, resize_to_limit: [250, 250]
-  end
+  has_many :photos
 
   validates :name, presence: true, length: { minimum: 3, maximum: 15 }
 end

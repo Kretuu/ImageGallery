@@ -75,3 +75,5 @@ gem 'cancancan'
 # Bootstrap
 gem "bootstrap"
 gem "sassc-rails"
+
+gem 'cropper_rails'
