@@ -2,9 +2,12 @@
      id="dropAndUploadModal" aria-labelledby="dropAndUploadModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered ">
     <div class="modal-content rounded-4 shadow">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cropImageModalLabel">Upload photo</h1>
+        <button type="button" class="btn-close close-upload" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
       <div class="modal-body p-5">
-        <h2 class="fw-bold mb-0">Upload photo</h2>
-
+        <div id="upload-alert" class="invisible alert"></div>
         <div class="dropzone position-relative ratio ratio-16x9" data-controller="dropzone"
              data-dropzone-photo-gallery-id-value=<%= @photo_gallery.id %>
         >
@@ -12,8 +15,18 @@
                style="border-style: dashed !important;">
             <div id="dropzoneContainer">
               <div class="dz-preview position-absolute top-0 start-0 bg-white text-center">
-                <img class="h-100" data-dz-thumbnail />
-                <div data-dz-remove></div>
+                <div class="h-100 w-100 position-relative img-container">
+                  <img id="previewImage" class="h-100" data-dz-thumbnail />
+                  <div id="imageOverlay" class="overlay bg-black" style="--bs-bg-opacity: .5">
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                      <button class="btn btn-outline-danger" data-dz-remove>Remove</button>
+                    </div>
+                  </div>
+                  <div id="upload-progress" class="mt-2 progress invisible" role="progressbar" aria-label="image progress"
+                       aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" data-dz-uploadprogress></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="dz-message d-flex flex-column h-100 w-100 justify-content-center">
@@ -21,8 +34,8 @@
               <span class="p-2">Click here or drag file</span>
             </div>
           </div>
-
         </div>
+
         <form>
 
         </form>
@@ -32,7 +45,8 @@
             <button type="button" class="btn btn-lg btn-primary mt-5 w-100" data-bs-dismiss="modal" data-dz-name>Cancel</button>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-lg btn-primary mt-5 w-100">Next</button>
+            <button id="upload-button" type="button"
+                    class="btn btn-lg btn-primary mt-5 w-100">Upload</button>
           </div>
         </div>
 

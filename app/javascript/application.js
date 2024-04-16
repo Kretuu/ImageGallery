@@ -10,4 +10,3 @@ import "bootstrap"
 
 import * as FullscreenMode from 'src/fullscreen_image'
 window.FullscreenMode = FullscreenMode
-import * as Cropper from 'src/crop_image'
