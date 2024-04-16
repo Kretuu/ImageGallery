@@ -1,0 +1,42 @@
+<div class="modal p-4 py-md-5" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+     id="dropAndUploadModal" aria-labelledby="dropAndUploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered ">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-body p-5">
+        <h2 class="fw-bold mb-0">Upload photo</h2>
+
+        <div class="dropzone position-relative ratio ratio-16x9" data-controller="dropzone"
+             data-dropzone-photo-gallery-id-value=<%= @photo_gallery.id %>
+        >
+          <div class="border border-secondary text-center mb-3 p-4"
+               style="border-style: dashed !important;">
+            <div id="dropzoneContainer">
+              <div class="dz-preview position-absolute top-0 start-0 bg-white text-center">
+                <img class="h-100" data-dz-thumbnail />
+                <div data-dz-remove></div>
+              </div>
+            </div>
+            <div class="dz-message d-flex flex-column h-100 w-100 justify-content-center">
+              <i class="p-2 fs-1 bi bi-plus-lg"></i>
+              <span class="p-2">Click here or drag file</span>
+            </div>
+          </div>
+
+        </div>
+        <form>
+
+        </form>
+
+        <div class="row px-2">
+          <div class="col">
+            <button type="button" class="btn btn-lg btn-primary mt-5 w-100" data-bs-dismiss="modal" data-dz-name>Cancel</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-lg btn-primary mt-5 w-100">Next</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

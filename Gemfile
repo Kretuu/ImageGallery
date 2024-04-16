@@ -77,3 +77,4 @@ gem "bootstrap"
 gem "sassc-rails"
 
 gem 'cropper_rails'
+gem 'dropzonejs-rails'
