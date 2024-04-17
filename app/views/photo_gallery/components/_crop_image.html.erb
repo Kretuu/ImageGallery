@@ -1,0 +1,29 @@
+<div class="modal fade" id="cropImageModal" data-bs-backdrop="static" data-bs-keyboard="false"
+     aria-hidden="true" aria-labelledby="cropImageModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="cropImageModalLabel">Crop image</h1>
+          <button type="button" class="btn-close close-upload" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      <div id="cropping-alert-container" class="container py-2 text-start d-none">
+        <div id="cropping-alert" class="alert"></div>
+      </div>
+
+
+
+        <div class="modal-body ratio ratio-16x9 text-center">
+          <div class="w-100 h-100">
+            <img class="mw-100 d-block" id="editedImage" alt="cropped image"/>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#dropAndUploadModal" data-bs-toggle="modal">Back</button>
+          <button id="save-cropping" type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+  </div>
+</div>

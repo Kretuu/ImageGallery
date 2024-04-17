@@ -4,7 +4,12 @@
 <!--<div class="fullscreen-preview text-center">-->
 <!--  <img id="preview" src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png">-->
 <!--</div>-->
-<%= render 'photo_gallery/components/drop_and_upload' %>
+<div data-controller="dropzone cropping" data-cropping-photo-gallery-id-value="<%= @photo_gallery.id %>"
+     data-cropping-photo-path-value=""
+     data-dropzone-photo-gallery-id-value="<%= @photo_gallery.id %>">
+  <%= render 'photo_gallery/components/drop_and_upload' %>
+  <%= render 'photo_gallery/components/crop_image' %>
+</div>
 
 <div class="position-relative text-center bg-body-secondary">
   <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">

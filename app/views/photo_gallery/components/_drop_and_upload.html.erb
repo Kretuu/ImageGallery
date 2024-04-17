@@ -7,10 +7,11 @@
         <button type="button" class="btn-close close-upload" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-5">
-        <div id="upload-alert" class="invisible alert"></div>
-        <div class="dropzone position-relative ratio ratio-16x9" data-controller="dropzone"
-             data-dropzone-photo-gallery-id-value=<%= @photo_gallery.id %>
-        >
+        <div id="upload-alert-container" class="container text-start d-none">
+          <div id="upload-alert" class="alert"></div>
+        </div>
+
+        <div id="dropzone" class="dropzone position-relative ratio ratio-16x9">
           <div class="border border-secondary text-center mb-3 p-4"
                style="border-style: dashed !important;">
             <div id="dropzoneContainer">

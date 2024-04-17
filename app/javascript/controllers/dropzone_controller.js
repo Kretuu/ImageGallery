@@ -27,18 +27,15 @@ export default class extends Controller {
             },
         };
 
-        this.dropzone = new Dropzone(this.element, dropzoneConfig);
+        const dropzoneElement = document.getElementById("dropzone")
+        this.dropzone = new Dropzone(dropzoneElement, dropzoneConfig);
         this.uploadButton = document.getElementById("upload-button");
         this.alert = document.getElementById("upload-alert");
+        this.alertContainer = document.getElementById("upload-alert-container");
         this.uploadButtonListener = () => {
             if(this.uploadButton.innerText === "Upload") {
                 this.dropzone.processQueue();
                 this.uploadButton.disabled = true;
-            } else {
-                const imagePreview = this.imagePreviewElement;
-                if(imagePreview) {
-                    document.getElementById("editedImage").setAttribute("src", imagePreview.src);
-                }
             }
         }
 
@@ -91,6 +88,11 @@ export default class extends Controller {
             this.uploadButton.setAttribute("data-bs-target","#cropImageModal");
             this.uploadButton.setAttribute("data-bs-toggle", "modal");
             this.uploadButton.disabled = false;
+
+            const imagePreview = this.imagePreviewElement;
+            if(imagePreview) {
+                document.getElementById("editedImage").setAttribute("src", imagePreview.src);
+            }
         });
 
         this.dropzone.on("processing", () => {
@@ -106,17 +108,18 @@ export default class extends Controller {
             document.querySelectorAll("#upload-progress").forEach((el) => {
                 el.classList.add("invisible");
             });
-            this.alert.classList.remove("invisible");
+            this.alertContainer.classList.remove("d-none");
             this.alert.classList.add("alert-danger");
             this.alert.innerText = "Something went wrong. Cannot upload the image.";
         });
 
-        this.dropzone.on("success", () => {
+        this.dropzone.on("success", (file, serverResponse) => {
             document.querySelectorAll("#upload-progress").forEach((el) => {
                 el.classList.add("invisible");
             });
-            this.alert.classList.remove("invisible");
+            this.alertContainer.classList.remove("d-none");
             this.alert.classList.add("alert-success");
+            this.element.setAttribute("data-cropping-photo-path-value", serverResponse.path)
             this.alert.innerText = "Image was uploaded successfully.";
         });
     }
@@ -139,8 +142,10 @@ export default class extends Controller {
 
         this.alert.classList.remove("alert-success");
         this.alert.classList.remove("alert-danger");
-        this.alert.classList.add("invisible");
+        this.alertContainer.classList.add("d-none");
         this.alert.innerText = "";
+
+        this.element.setAttribute("data-cropping-photo-path-value", "")
     }
 
     get imagePreviewElement() {

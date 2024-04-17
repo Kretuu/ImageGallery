@@ -32,6 +32,14 @@ class PhotoGalleryController < ApplicationController
   end
 
   def show
+    if params[:notice]
+      flash.now[:notice] = params[:notice]
+    end
+
+    if params[:alert]
+      flash.now[:alert] = params[:alert]
+    end
+
     # flash.now[:alert] = "Could not add a facilitator to the module."
   end
 
