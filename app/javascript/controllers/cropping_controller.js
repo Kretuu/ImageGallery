@@ -7,6 +7,7 @@ export default class extends Controller {
         photoGalleryId: Number,
         photoPath: String,
     }
+
     croppingConfiguration = {
 
     }
@@ -16,16 +17,6 @@ export default class extends Controller {
         this.alert = document.getElementById('cropping-alert');
         this.alertContainer = document.getElementById('cropping-alert-container');
         this.initialiseObservers();
-
-
-        // axios({
-        //     method: 'GET',
-        //     url: '/gallery/1/photo/49/edit',
-        // }).then((response) => {
-        //     if(response.data.original_image) this.image.src = response.data.original_image;
-        //     this.setCroppingConfiguration(response.data);
-        //     this.setFormInputs(response.data);
-        // })
     }
 
     initialiseObservers() {
@@ -82,15 +73,18 @@ export default class extends Controller {
         })
     }
 
-    setImagePath(path) {
-        this.photoPathValue = path;
+    setImagePath() {
+        console.log("test")
         axios({
             method: 'GET',
-            url: path + "/edit",
+            url: this.photoPathValue + "/edit",
         }).then((response) => {
             if(response.data.original_image) this.image.src = response.data.original_image;
             this.setCroppingConfiguration(response.data)
-            this.setFormInputs(response.data)
+            console.log(response.data)
+            console.log(this.croppingConfiguration)
+            console.log(this.image.src)
+            document.getElementById('open-cropping-modal').click()
         });
     }
 
@@ -139,15 +133,6 @@ export default class extends Controller {
                 width: inputData.w,
                 height: inputData.h
             }
-        }
-    }
-
-    setFormInputs(inputData) {
-        if(inputData.x || inputData.y || inputData.w || inputData.h) {
-            document.getElementById('photo_x').setAttribute("value", inputData.x);
-            document.getElementById('photo_y').setAttribute("value", inputData.y);
-            document.getElementById('photo_w').setAttribute("value", inputData.w);
-            document.getElementById('photo_h').setAttribute("value", inputData.h);
         }
     }
 }

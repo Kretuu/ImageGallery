@@ -1,5 +1,11 @@
 <%= stylesheet_link_tag 'index' %>
 
+<div id="cropping-container" data-controller="cropping" data-cropping-photo-gallery-id-value="<%= @photo_gallery.id %>"
+     data-cropping-photo-path-value="" data-action="photo:setPath@window->cropping#setImagePath">
+  <button id="open-cropping-modal" class="d-none" data-bs-target="#cropImageModal" data-bs-toggle="modal"></button>
+  <%= render 'photo_gallery/components/crop_image' %>
+</div>
+
 <div class="position-relative text-center bg-body-secondary">
   <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">
     <% if @photo_gallery.thumbnail %>
@@ -43,137 +49,31 @@
     <%= render 'layouts/error' %>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-2">
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-            <% if @set_thumbnail %>
-              <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery, thumbnail_id: 1), method: :post,
-                            class: "overlay bg-warning img-thumbnail", style: "--bs-bg-opacity: .5" do %>
-                <div class="position-absolute top-50 start-50 translate-middle">
-                  <i class="fs-1 text-warning bi bi-check-lg"></i>
+      <% @photo_gallery.photos.each do |photo| %>
+        <div class="col">
+          <div class="img-container w-100 h-100 ratio ratio-4x3">
+            <%= image_tag photo.thumbnail, class: "object-fit-cover img-thumbnail bg-dark h-100",
+                          alt: "thumbnail#{photo.id}" %>
+              <% if @set_thumbnail %>
+                <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery, thumbnail_id: 1), method: :post,
+                              class: "overlay bg-warning img-thumbnail", style: "--bs-bg-opacity: .5" do %>
+                  <div class="position-absolute top-50 start-50 translate-middle">
+                    <i class="fs-1 text-warning bi bi-check-lg"></i>
+                  </div>
+                <% end %>
+              <% else %>
+                <div data-controller="photo"
+                     data-photo-path-value="<%= photo_gallery_photo_path(@photo_gallery, photo) %>"
+                     class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
+                  <div class="position-absolute top-50 start-50 translate-middle">
+                    <button class="btn btn-outline-warning" data-action="photo#setPath">Crop</button>
+                    <%= link_to "Delete", @photo_gallery, method: :delete, class: "btn btn-outline-danger" %>
+                  </div>
                 </div>
               <% end %>
-            <% else %>
-              <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-                <div class="position-absolute top-50 start-50 translate-middle">
-                  <%= link_to "Crop", edit_photo_gallery_path(@photo_gallery), class: "btn btn-outline-warning" %>
-                  <%= link_to "Delete", @photo_gallery, method: :delete, class: "btn btn-outline-danger" %>
-                </div>
-              </div>
-            <% end %>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://thumbs.dreamstime.com/b/odmienna-koncepcja-bycia-innym-i-wyjątkowym-symbolem-indywidualności-specjalnego-talentu-reprezentującego-przywództwo-w-d-191808155.jpg"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <%= link_to "Crop", edit_photo_gallery_path(@photo_gallery), class: "btn btn-outline-warning" %>
-              <%= link_to "Delete", @photo_gallery, method: :delete, class: "btn btn-outline-danger" %>
-            </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://img.freepik.com/premium-photo/red-balloon-floating-out-from-blue-balloons-that-are-tied-blue-background-performance-outstanding-from-crowd-different-thinking-disruption-leadership-by-3d-rendering_50039-2720.jpg"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://media.interflora.co.uk/i/interflora/Single_red_rose_with_buds"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="img-container w-100 h-100 ratio ratio-4x3">
-          <img src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/61a77a4a6e46e5363fbbde1d_purple-pink.png"
-               class="object-fit-cover img-thumbnail bg-dark h-100" alt="">
-          <div class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <button class="btn btn-outline-warning">Crop</button>
-              <button class="btn btn-outline-danger">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
+      <% end %>
     </div>
   </div>
 </div>
