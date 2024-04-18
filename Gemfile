@@ -68,6 +68,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# Postgresql
+gem "pg"
+
 # Authentication and authorisation
 gem "devise", "~> 4.9"
 gem 'cancancan'

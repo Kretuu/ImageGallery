@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   root "photo_gallery#index"
   resources :photo_gallery, path: 'gallery' do
     post :set_thumbnail, action: :set_thumbnail, controller: 'photo_gallery'
-    resources :photo
+    resources :photo, except: [:new, :index]
   end
   get :my_galleries, action: :my_galleries, controller: 'photo_gallery'
 end

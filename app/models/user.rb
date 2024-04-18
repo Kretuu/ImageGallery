@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :validatable
   has_many :photo_galleries, dependent: :destroy
 
+  validates :first_name, :last_name, presence: true
+
   def name
     "#{first_name} #{last_name}"
   end
