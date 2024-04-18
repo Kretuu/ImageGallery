@@ -6,6 +6,23 @@
   <%= render 'photo_gallery/components/crop_image' %>
 </div>
 
+<div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure you want to delete selected photo?</p>
+        <p>This cannot be undone!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <%= button_to "Delete", photo_gallery_photo_path(0, 0), method: :delete,
+                      form: { id: "confirmDeleteButton" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="position-relative text-center bg-body-secondary">
   <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">
     <% if @photo_gallery.thumbnail %>
@@ -67,7 +84,8 @@
                      class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
                   <div class="position-absolute top-50 start-50 translate-middle">
                     <button class="btn btn-outline-warning" data-action="photo#setPath">Crop</button>
-                    <%= link_to "Delete", @photo_gallery, method: :delete, class: "btn btn-outline-danger" %>
+                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                            data-action="photo#delete">Delete</button>
                   </div>
                 </div>
               <% end %>

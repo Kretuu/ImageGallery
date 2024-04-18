@@ -40,6 +40,17 @@ class PhotoController < ApplicationController
     }
   end
 
+  def destroy
+    if @photo.destroy
+      redirect_to edit_photo_gallery_path(@photo_gallery),
+                  notice: "Photo has been successfully deleted."
+    else
+      redirect_to edit_photo_gallery_path(@photo_gallery),
+                  alert: "Something went wrong. Could not delete the photo."
+    end
+
+  end
+
   private
   def update_params
     if params[:photo][:id]
