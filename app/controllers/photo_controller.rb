@@ -2,9 +2,6 @@ class PhotoController < ApplicationController
   load_and_authorize_resource :photo_gallery
   load_and_authorize_resource :photo, through: :photo_gallery, except: [:create]
 
-  def new
-
-  end
 
   def create
     @photo = Photo.new(photo_gallery_id: params[:photo_gallery_id])
@@ -28,9 +25,9 @@ class PhotoController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: t.response }
-    end
+    render json: {
+      image: url_for(@photo.image)
+    }
   end
 
   def edit

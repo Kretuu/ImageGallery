@@ -102,10 +102,6 @@ export default class extends Controller {
             rotatable: false,
             scalable: false,
             crop(event) {
-                // console.log("x: " + event.detail.x)
-                // console.log("y: " + event.detail.y)
-                // console.log("w: " + event.detail.width)
-                // console.log("h: " + event.detail.height)
                 setInputs({
                     x: event.detail.x < 0 ? 0 : event.detail.x,
                     y: event.detail.y < 0 ? 0 : event.detail.y,
@@ -115,10 +111,6 @@ export default class extends Controller {
             },
             ready() {
                 if(cropData.left !== null) {
-                    // const container = document.querySelector(".cropper-container")
-                    // const cropBox = document.querySelector(".cropper-crop-box")
-                    // cropData.x = cropData.x + ((container.offsetWidth - cropBox.offsetWidth) / 2)
-                    // cropData.y = cropData.y + ((container.offsetHeight - cropBox.offsetHeight) / 2)
                     this.cropper.setCropBoxData(cropData);
                 }
             }

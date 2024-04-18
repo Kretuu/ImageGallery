@@ -1,0 +1,54 @@
+<button id="modal-launch" class="d-none" data-bs-toggle="modal" data-bs-target="#preview"></button>
+<div id="preview" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen bg-transparent">
+    <div class="modal-content bg-transparent">
+      <div class="position-absolute top-0 end-0 mx-3 my-2 py-2 px-5 z-3" data-bs-theme="dark">
+        <button data-bs-dismiss="modal" data-action="preview#close" type="button" class="btn-close fs-3" aria-label="Close"></button>
+      </div>
+
+      <button id="preview-pause" data-action="preview#pauseSlideshow"
+              class="btn position-absolute bottom-0 start-50 translate-middle-x z-3 visually-hidden"
+              style="--bs-btn-color: var(--bs-body-bg); background-color: unset !important;
+                color: var(--bs-secondary-bg) !important;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+        </svg>
+      </button>
+      <button id="preview-resume" data-action="preview#resumeSlideshow"
+              class="btn position-absolute bottom-0 start-50 translate-middle-x z-3"
+              style="--bs-btn-color: var(--bs-body-bg); background-color: unset !important;
+                color: var(--bs-secondary-bg) !important;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
+        </svg>
+      </button>
+
+      <div id="preview-carousel" class="carousel slide h-100 w-100 py-5">
+        <div id="preview-images-container" class="carousel-inner h-100">
+          <div id="preview-item-prev" class="carousel-item h-100 w-100">
+            <img src="" class="d-block mh-100 mw-100 m-auto" alt="">
+          </div>
+          <div id="preview-item-current" class="carousel-item h-100 w-100 active">
+            <img src="" class="d-block mh-100 mw-100 m-auto" alt="">
+          </div>
+          <div id="preview-item-next" class="carousel-item h-100 w-100">
+            <img src="" class="d-block mh-100 mw-100 m-auto" alt="">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-action="preview#prev" >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-action="preview#next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <button id="preview-back" type="button" class="d-none" data-bs-target="#preview-carousel" data-bs-slide="prev"></button>
+        <button id="preview-next" type="button" class="d-none" data-bs-target="#preview-carousel" data-bs-slide="next"></button>
+      </div>
+    </div>
+  </div>
+</div>
