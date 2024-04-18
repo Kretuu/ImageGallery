@@ -1,0 +1,16 @@
+<div class="card mx-auto my-5 p-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Create new album</h5>
+    <%= form_with model: @photo_gallery, url: photo_gallery_index_path(@photo_gallery), method: :post do |f| %>
+      <div class="mb-3">
+        <%= f.text_field :name, placeholder: "Album title", class: "form-control form-control-lg",
+                         id: "validationName", "aria-describedby": "validationNameFeedback", required: 1,
+                         minlength: 3, maxlength: 20 %>
+        <div id="validationNameFeedback" class="invalid-feedback">
+          Album title is not valid.
+        </div>
+      </div>
+      <%= f.submit "Save", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

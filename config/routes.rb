@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     post :set_thumbnail, action: :set_thumbnail, controller: 'photo_gallery'
     resources :photo
   end
+  get :my_galleries, action: :my_galleries, controller: 'photo_gallery'
 end

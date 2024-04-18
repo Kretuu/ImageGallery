@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>Gallery</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,17 +10,21 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="h-100 text-bg-dark">
     <header class="p-3 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
-
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Galleries</a></li>
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to "My Galleries", my_galleries_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "My account", edit_user_registration_path(current_user), class: "nav-link px-2 text-white" %>
+              </li>
+            <% end %>
+
           </ul>
 
           <div class="text-end">
@@ -35,19 +39,18 @@
       </div>
     </header>
 
-    <main class="d-flex justify-content-center bg-body-tertiary">
-      <div class="col-lg-12">
-        <%= yield %>
-      </div>
-    </main>
+      <main class="d-flex justify-content-center bg-body-tertiary text-bg-light">
+        <div class="col-lg-12">
+          <%= yield %>
+        </div>
+      </main>
 
-    <footer class="text-body-secondary py-5">
+    <footer class=" py-5">
       <div class="container">
         <p class="float-end mb-1">
           <a href="#">Back to top</a>
         </p>
-        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
+        <p class="mb-1">Jakub Kreczetowski &copy; 2024</p>
       </div>
     </footer>
   </body>

@@ -9,8 +9,8 @@
 <div class="position-relative text-center bg-body-secondary">
   <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">
     <% if @photo_gallery.thumbnail %>
-      <img src="<%= @photo_gallery.thumbnail %>"
-           class="object-fit-cover bg-dark h-100" alt="">
+      <%= image_tag @photo_gallery.thumbnail.image, class: "object-fit-cover bg-dark h-100",
+                    alt: "album cover" %>
     <% end %>
     <div class="col-md-6 p-lg-5 mx-auto my-5">
       <%= form_with model: @photo_gallery, method: :put,
@@ -34,9 +34,9 @@
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
         <%= link_to "Go back to gallery view", photo_gallery_path(@photo_gallery), class: "icon-link" %>
         <% if @set_thumbnail %>
-          <%= link_to "Cancel set thumbnail", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
+          <%= link_to "Cancel set cover", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
         <% else %>
-          <%= link_to "Set thumbnail", edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), class: "icon-link" %>
+          <%= link_to "Set cover photo", edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), class: "icon-link" %>
         <% end %>
       </div>
     </div>
@@ -55,7 +55,7 @@
             <%= image_tag photo.thumbnail, class: "object-fit-cover img-thumbnail bg-dark h-100",
                           alt: "thumbnail#{photo.id}" %>
               <% if @set_thumbnail %>
-                <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery, thumbnail_id: 1), method: :post,
+                <%= button_to photo_gallery_set_thumbnail_path(@photo_gallery, thumbnail_id: photo.id), method: :post,
                               class: "overlay bg-warning img-thumbnail", style: "--bs-bg-opacity: .5" do %>
                   <div class="position-absolute top-50 start-50 translate-middle">
                     <i class="fs-1 text-warning bi bi-check-lg"></i>

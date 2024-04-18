@@ -13,21 +13,20 @@
   <div class="position-relative text-center bg-body-secondary">
     <div class="img-container w-100 h-100 ratio" style="--bs-aspect-ratio: 25%">
       <% if @photo_gallery.thumbnail %>
-        <img src="<%= @photo_gallery.thumbnail %>" class="object-fit-cover bg-dark h-100" alt="">
+        <%= image_tag @photo_gallery.thumbnail.image, class: "object-fit-cover bg-dark h-100",
+                      alt: "album cover" %>
       <% end %>
       <div class="col-md-6 p-lg-5 mx-auto my-5">
         <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
         <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
         <div class="d-flex gap-3 justify-content-center lead fw-normal">
-          <a class="icon-link" data-action="preview#startSlideshow">
+          <a type="button" class="icon-link" data-action="preview#startSlideshow">
             Slideshow
-            <svg class="bi"><use xlink:href="#chevron-right"/></svg>
           </a>
           <% if can? :manage, @photo_gallery %>
             <%= link_to "Edit gallery", edit_photo_gallery_path(@photo_gallery), class: "icon-link" %>
             <a type="button" class="icon-link" data-bs-toggle="modal" data-bs-target="#dropAndUploadModal">
               Add photo
-              <svg class="bi"><use xlink:href="#chevron-right"/></svg>
             </a>
           <% end %>
         </div>

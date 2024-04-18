@@ -2,15 +2,38 @@ class PhotoGalleryController < ApplicationController
   before_action :set_gallery, only: [:set_thumbnail]
   load_and_authorize_resource :photo_gallery
   def index
+  end
 
+  def my_galleries
+    @photo_galleries = PhotoGallery.accessible_by(current_ability, :manage)
+    @my_gallery = true
+    render :index
   end
 
   def new
+  end
 
+  def create
+    if @photo_gallery.save
+      redirect_to @photo_gallery, notice: "Gallery was successfully created. You can now add some photos and set cover photo. You can only choose cover photo from images uploaded to the album."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @photo_gallery.update(thumbnail: nil) && @photo_gallery.destroy
+      redirect_to my_galleries_path, notice: "Gallery was successfully deleted."
+    else
+      redirect_to my_galleries_path, alert: "Something went wrong. Could not delete the gallery."
+    end
   end
 
   def edit
     @set_thumbnail = params[:set_thumbnail]
+    if @set_thumbnail
+      flash.now[:notice] = "Click on the photo in gallery to set the cover photo."
+    end
   end
 
   def update
@@ -25,9 +48,9 @@ class PhotoGalleryController < ApplicationController
   def set_thumbnail
     requested_photo = Photo.find(params[:thumbnail_id])
     if requested_photo && @photo_gallery.update(thumbnail: requested_photo)
-      redirect_to :edit, notice: "Thumbnail was set successfully"
+      redirect_to edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), notice: "Thumbnail was set successfully"
     else
-      redirect_to :edit, alert: "Something went wrong"
+      redirect_to edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), alert: "Something went wrong"
     end
   end
 
@@ -39,8 +62,6 @@ class PhotoGalleryController < ApplicationController
     if params[:alert]
       flash.now[:alert] = params[:alert]
     end
-
-    # flash.now[:alert] = "Could not add a facilitator to the module."
   end
 
   private
