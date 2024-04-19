@@ -113,11 +113,16 @@ export default class extends Controller {
         const newInstance = document.createElement('div');
         newInstance.classList.add('carousel-item', 'h-100', 'w-100');
 
+        const flexContainer = document.createElement('div');
+        flexContainer.classList.add('d-flex', 'w-100', 'h-100', 'align-items-center');
+
         const imageInstance = document.createElement('img');
         imageInstance.src = src;
         imageInstance.alt = 'image index ' + index;
         imageInstance.classList.add('d-block', 'mh-100', 'mw-100', 'm-auto');
-        newInstance.appendChild(imageInstance);
+
+        newInstance.appendChild(flexContainer);
+        flexContainer.appendChild(imageInstance);
 
         if(prepend) {
             newInstance.id = 'preview-item-prev';
