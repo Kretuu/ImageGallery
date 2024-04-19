@@ -31,9 +31,11 @@ class PhotoGalleryController < ApplicationController
 
   def edit
     @set_thumbnail = params[:set_thumbnail]
-    if @set_thumbnail
+    if @set_thumbnail && !flash.now[:notice]
       flash.now[:notice] = "Click on the photo in gallery to set the cover photo."
     end
+
+    show_alerts
   end
 
   def update
@@ -48,20 +50,14 @@ class PhotoGalleryController < ApplicationController
   def set_thumbnail
     requested_photo = Photo.find(params[:thumbnail_id])
     if requested_photo && @photo_gallery.update(thumbnail: requested_photo)
-      redirect_to edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), notice: "Thumbnail was set successfully"
+      redirect_to edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), notice: "Cover photo was set successfully"
     else
       redirect_to edit_photo_gallery_path(@photo_gallery, set_thumbnail: 1), alert: "Something went wrong"
     end
   end
 
   def show
-    if params[:notice]
-      flash.now[:notice] = params[:notice]
-    end
-
-    if params[:alert]
-      flash.now[:alert] = params[:alert]
-    end
+    show_alerts
   end
 
   private
@@ -72,5 +68,15 @@ class PhotoGalleryController < ApplicationController
 
   def photo_gallery_params
     params.require(:photo_gallery).permit(:name)
+  end
+
+  def show_alerts
+    if params[:notice]
+      flash.now[:notice] = params[:notice]
+    end
+
+    if params[:alert]
+      flash.now[:alert] = params[:alert]
+    end
   end
 end
