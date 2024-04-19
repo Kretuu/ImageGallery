@@ -22,17 +22,23 @@ POSTGRES_PASSWORD=<Put here password of your choice>
 RAILS_MASTER_KEY=<Put here contents of config/master.key generated in previous step>
 ```
 
-3. Build and run the code using following command. App will be built and run
+3. Generate Gemfile.lock which will support aarch64-linux
+
+```
+bundle lock --add-platform aarch64-linux
+```
+
+4. Build and run the code using following command. App will be built and run
  in detached mode which means it will run in the background.
 
 ```
-sudo docker compose build && sudo docker compose -p gallery up -d
+docker compose build && docker compose -p gallery up -d
 ```
 
-4. In order to stop the app you can just use
+5. In order to stop the app you can just use
 
 ```
-sudo docker compose -p gallery down -v
+docker compose -p gallery down -v
 ```
 
 ### Run tests
