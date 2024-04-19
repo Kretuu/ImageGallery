@@ -34,3 +34,25 @@ sudo docker compose build && sudo docker compose -p gallery up -d
 ```
 sudo docker compose -p gallery down -v
 ```
+
+### Run tests
+
+You need to have Ruby installed on your machine. Run following commands
+from the root directory of this app.
+
+1. If you don't have bundler installed run this command
+
+```
+gem install bundler
+```
+
+2. Now install all gems needed to run the app
+
+```
+bundle install
+```
+
+3. You can run tests with the command
+```
+rspec spec
+```
