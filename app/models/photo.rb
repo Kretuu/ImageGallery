@@ -6,11 +6,19 @@ class Photo < ApplicationRecord
   before_destroy :remove_thumbnail_references
 
   def image
-    original_image.variant(crop: [x, y, w, h])
+    if !(x.nil? || y.nil? || w.nil? || h.nil?)
+      original_image.variant(crop: [x, y, w, h])
+    else
+      original_image
+    end
   end
 
   def thumbnail
-    original_image.variant(crop: [x, y, w, h], resize_to_limit: [250, 250])
+    if !(x.nil? || y.nil? || w.nil? || h.nil?)
+      original_image.variant(crop: [x, y, w, h], resize_to_limit: [250, 250])
+    else
+      original_image.variant(resize_to_limit: [250, 250])
+    end
   end
 
 
