@@ -50,6 +50,7 @@ export default class extends Controller {
             if(element) {
                 document.querySelectorAll("#imageOverlay").forEach((el) => {
                     el.style.width = element.offsetWidth + "px";
+                    el.style.height = element.offsetHeight + "px";
                     el.style.left = (el.parentElement.offsetWidth - element.offsetWidth) / 2 + "px";
                 });
             }
@@ -67,14 +68,23 @@ export default class extends Controller {
 
     registerDropzoneListeners() {
         this.dropzone.on("addedfile", file => {
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.onload = function (e) {
-                var img = new Image;
+                let img = new Image;
                 img.onload = function() {
-                    var aspectRatio = img.width / img.height;
+                    let aspectRatio = img.width / img.height;
                     document.querySelectorAll("#imageOverlay").forEach((el) => {
-                        const width = aspectRatio * el.offsetHeight
+                        let height;
+                        let width;
+                        if(aspectRatio > 16 / 9) {
+                            width = el.parentElement.offsetWidth;
+                            height = width / aspectRatio;
+                        } else {
+                            height = el.parentElement.offsetHeight;
+                            width = aspectRatio * height;
+                        }
                         el.style.width = width + "px";
+                        el.style.height = height + "px";
                         el.style.left = (el.parentElement.offsetWidth - width) / 2 + "px";
                     });
                 };
