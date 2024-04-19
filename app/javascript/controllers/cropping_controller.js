@@ -39,14 +39,13 @@ export default class extends Controller {
         modalObserver.observe(croppingModal, { attributes: true });
 
         document.getElementById("save-cropping").addEventListener('click', (event) => {
-            console.log(this.photoPathValue)
             axios({
                 method: 'PUT',
                 url: this.photoPathValue,
                 data: {
                     photo: {
-                        x: this.croppingConfiguration.left,
-                        y: this.croppingConfiguration.top,
+                        x: this.croppingConfiguration.x,
+                        y: this.croppingConfiguration.y,
                         w: this.croppingConfiguration.width,
                         h: this.croppingConfiguration.height
                     }
@@ -74,16 +73,12 @@ export default class extends Controller {
     }
 
     setImagePath() {
-        console.log("test")
         axios({
             method: 'GET',
             url: this.photoPathValue + "/edit",
         }).then((response) => {
             if(response.data.original_image) this.image.src = response.data.original_image;
             this.setCroppingConfiguration(response.data)
-            console.log(response.data)
-            console.log(this.croppingConfiguration)
-            console.log(this.image.src)
             document.getElementById('open-cropping-modal').click()
         });
     }
@@ -96,23 +91,20 @@ export default class extends Controller {
             viewMode: 2,
             background: false,
             autoCrop: true,
+            data: cropData,
             zoomable: false,
             autoCropArea: 1,
             movable: false,
             rotatable: false,
             scalable: false,
             crop(event) {
+                console.log(event.detail)
                 setInputs({
                     x: event.detail.x < 0 ? 0 : event.detail.x,
                     y: event.detail.y < 0 ? 0 : event.detail.y,
                     w: event.detail.width < 0 ? 0 : event.detail.width,
                     h: event.detail.height < 0 ? 0 : event.detail.height
                 });
-            },
-            ready() {
-                if(cropData.left !== null) {
-                    this.cropper.setCropBoxData(cropData);
-                }
             }
         });
     }
@@ -120,8 +112,8 @@ export default class extends Controller {
     setCroppingConfiguration(inputData) {
         if(inputData.x || inputData.y || inputData.w || inputData.h) {
             this.croppingConfiguration = {
-                left: inputData.x,
-                top: inputData.y,
+                x: inputData.x,
+                y: inputData.y,
                 width: inputData.w,
                 height: inputData.h
             }
