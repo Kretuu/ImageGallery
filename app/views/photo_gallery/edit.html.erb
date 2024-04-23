@@ -47,7 +47,7 @@
           <input type="reset" class="btn btn-secondary" value="Reset">
         </div>
       <% end %>
-      <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
+      <h3 class="fw-normal text-light mb-3">Author: <%= @photo_gallery.user.name %></h3>
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
         <%= link_to "Go back to gallery view", photo_gallery_path(@photo_gallery), class: "icon-link" %>
         <% if @set_thumbnail %>
