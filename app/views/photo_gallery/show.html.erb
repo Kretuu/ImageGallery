@@ -17,8 +17,10 @@
                       alt: "album cover" %>
       <% end %>
       <div class="col-md-6 p-lg-5 mx-auto my-5">
-        <h1 class="display-3 fw-bold"><%= @photo_gallery.name %></h1>
-        <h3 class="fw-normal text-muted mb-3">Author: <%= @photo_gallery.user.name %></h3>
+        <h1 class="display-3 fw-bold text-light"><%= @photo_gallery.name %></h1>
+        <h3 class="fw-normal mb-3 text-light">
+          Author: <%= @photo_gallery.user.name %>
+        </h3>
         <div class="d-flex gap-3 justify-content-center lead fw-normal">
           <a type="button" class="icon-link" data-action="preview#startSlideshow">
             Slideshow
