@@ -47,7 +47,9 @@
           <input type="reset" class="btn btn-secondary" value="Reset">
         </div>
       <% end %>
-      <h3 class="fw-normal text-light mb-3">Author: <%= @photo_gallery.user.name %></h3>
+      <h3 class="fw-normal mb-3 <%= if @photo_gallery.thumbnail then 'text-light' else 'text-dark' end %>">
+        Author: <%= @photo_gallery.user.name %>
+      </h3>
       <div class="d-flex gap-3 justify-content-center lead fw-normal">
         <%= link_to "Go back to gallery view", photo_gallery_path(@photo_gallery), class: "icon-link" %>
         <% if @set_thumbnail %>
@@ -82,9 +84,9 @@
                 <div data-controller="photo"
                      data-photo-path-value="<%= photo_gallery_photo_path(@photo_gallery, photo) %>"
                      class="overlay bg-black img-thumbnail" style="--bs-bg-opacity: .5">
-                  <div class="position-absolute top-50 start-50 translate-middle">
-                    <button class="btn btn-outline-warning" data-action="photo#setPath">Crop</button>
-                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                  <div class="position-absolute top-50 start-50 translate-middle d-flex">
+                    <button class="btn btn-outline-warning mx-1" data-action="photo#setPath">Crop</button>
+                    <button class="btn btn-outline-danger mx-1" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                             data-action="photo#delete">Delete</button>
                   </div>
                 </div>
